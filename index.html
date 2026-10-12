@@ -618,6 +618,24 @@
   .np-title{margin:4px 0 12px; font-family:'Fraunces', serif; font-size:20px; color:var(--plum-deep);}
   .now-playing audio{width:100%;}
   .track a.badge{text-decoration:none;}
+
+  .vote-hint{margin-top:22px; font-size:15px; color:var(--ink-soft);}
+  .track{align-items:center;}
+  .track .vote{flex:none; display:inline-flex; align-items:center; gap:6px; margin-left:12px; padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--terracotta); font:600 13px 'Karla',sans-serif; cursor:pointer;}
+  .track .vote:hover,.track .vote:focus-visible{background:var(--paper); border-color:var(--terracotta);}
+  .track .vote.voted{background:var(--terracotta); color:#fff; border-color:var(--terracotta);}
+  #vote-dialog{border:none; border-radius:8px; padding:0; max-width:420px; width:calc(100% - 32px); background:var(--paper); color:var(--ink); box-shadow:0 30px 60px -20px rgba(44,36,31,.45);}
+  #vote-dialog::backdrop{background:rgba(44,36,31,.45);}
+  #vote-form{position:relative; padding:30px 28px 26px;}
+  .vote-close{position:absolute; top:10px; right:12px; border:none; background:none; font-size:26px; line-height:1; color:var(--ink-soft); cursor:pointer;}
+  .vote-kicker{margin:0; font-size:13px; font-weight:600; color:var(--terracotta);}
+  #vote-title{margin:6px 0 10px; font-family:'Fraunces',serif; font-size:24px; color:var(--plum-deep);}
+  .vote-sub{margin:0 0 16px; font-size:15px; color:var(--ink-soft);}
+  #vote-email{width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:4px; font:16px 'Karla',sans-serif; background:#fff; color:var(--ink);}
+  .vote-submit{margin-top:12px; width:100%; padding:12px; border:none; border-radius:4px; background:var(--plum-deep); color:#fff; font:600 16px 'Karla',sans-serif; cursor:pointer;}
+  .vote-msg{margin:14px 0 0; font-family:'Fraunces',serif; font-style:italic; font-size:16px; color:var(--plum-deep);}
+  .vote-msg.err{font-family:'Karla',sans-serif; font-style:normal; color:var(--terracotta);}
+  @media (max-width:520px){ .track .vote span{display:none;} .track .vote{padding:6px 10px;} .track .status{font-size:12px;} }
 </style>
 
 <div class="topbar">
@@ -772,22 +790,35 @@
         <p class="np-title">More Is Coming</p>
         <audio controls preload="none" src="more-is-coming.mp3">Your browser can't play this audio.</audio>
       </div>
+      <p class="vote-hint">Which song speaks to you most? Tap <strong>&#9825; Vote</strong> beside your favorite.</p>
       <div class="tracklist">
-      <div class="track"><span class="num">01</span><span class="name">Our Father Flame</span><a class="status" href="#song">Watch above</a></div>
-      <div class="track"><span class="num">02</span><span class="name">More Is Coming</span><a class="status badge" href="#album">Listen above</a></div>
-      <div class="track"><span class="num">03</span><span class="name">Great Servants</span></div>
-      <div class="track"><span class="num">04</span><span class="name">Threshold of Your Light</span></div>
-      <div class="track"><span class="num">05</span><span class="name">Bring Yourself Home</span></div>
-      <div class="track"><span class="num">06</span><span class="name">Lay Down Your Blade</span></div>
-      <div class="track"><span class="num">07</span><span class="name">Our Daily Bread</span></div>
-      <div class="track"><span class="num">08</span><span class="name">Step Into the Sunlight</span></div>
-      <div class="track"><span class="num">09</span><span class="name">Pray First</span></div>
+      <div class="track"><span class="num">01</span><span class="name">Our Father Flame</span><a class="status" href="#song">Watch above</a><button type="button" class="vote" data-song="Our Father Flame" aria-label="Vote for Our Father Flame">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">02</span><span class="name">More Is Coming</span><a class="status badge" href="#album">Listen above</a><button type="button" class="vote" data-song="More Is Coming" aria-label="Vote for More Is Coming">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">03</span><span class="name">Great Servants</span><button type="button" class="vote" data-song="Great Servants" aria-label="Vote for Great Servants">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">04</span><span class="name">Threshold of Your Light</span><button type="button" class="vote" data-song="Threshold of Your Light" aria-label="Vote for Threshold of Your Light">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">05</span><span class="name">Bring Yourself Home</span><button type="button" class="vote" data-song="Bring Yourself Home" aria-label="Vote for Bring Yourself Home">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">06</span><span class="name">Lay Down Your Blade</span><button type="button" class="vote" data-song="Lay Down Your Blade" aria-label="Vote for Lay Down Your Blade">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">07</span><span class="name">Our Daily Bread</span><button type="button" class="vote" data-song="Our Daily Bread" aria-label="Vote for Our Daily Bread">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">08</span><span class="name">Step Into the Sunlight</span><button type="button" class="vote" data-song="Step Into the Sunlight" aria-label="Vote for Step Into the Sunlight">&#9825;<span>Vote</span></button></div>
+      <div class="track"><span class="num">09</span><span class="name">Pray First</span><button type="button" class="vote" data-song="Pray First" aria-label="Vote for Pray First">&#9825;<span>Vote</span></button></div>
       </div>
       <p class="avail">Every lyric traces back to something in the book — messages Lisa received in her Wednesday appointments, sometimes word for word, sometimes turned to verse. Read a chapter, then find its echo in a song.</p>
       <p class="avail"><strong>More Is Coming</strong> is streaming now. The full album streams everywhere on <strong>October 17</strong>, and the CD arrives on Amazon <strong>November 1</strong>.</p>
     </div>
   </div>
 </section>
+
+<dialog id="vote-dialog" aria-labelledby="vote-title">
+  <form id="vote-form" method="dialog">
+    <button type="button" class="vote-close" aria-label="Close">&times;</button>
+    <p class="vote-kicker">Your favorite worship song</p>
+    <h3 id="vote-title">More Is Coming</h3>
+    <p class="vote-sub">Add your email to cast your vote. You'll also get a note when the full album streams on October 17.</p>
+    <input type="email" id="vote-email" placeholder="you@email.com" aria-label="Email address" autocomplete="email" required>
+    <button type="submit" class="vote-submit">Cast my vote &#9825;</button>
+    <p class="vote-msg" id="vote-msg" role="status" aria-live="polite" hidden></p>
+  </form>
+</dialog>
 
 <section id="how-made">
   <div class="wrap">
@@ -845,15 +876,15 @@
 <section class="connect" id="connect">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Stay Connected</h2>
-      <p class="lede"><strong>He Brews</strong>, <strong>He Brews <span class="love-mark">Love</span></strong>, and The Love Journals launch together on Amazon.</p>
+      <h2>Stream it with me on October 17</h2>
+      <p class="lede">Stream <strong>He Brews <span class="love-mark">Love</span></strong> with me when it&rsquo;s released on <strong>October 17</strong>, and be the first to know when <strong>He Brews</strong> and The Love Journals arrive on Amazon. One short note when the album is out, one when the book arrives. That&rsquo;s it.</p>
     </div>
-    <div class="launch-date">November 1, 2026</div>
+    <div class="launch-date">Album October 17 &middot; Book November 1</div>
     <form class="signup" id="ml-signup" action="/api/subscribe" method="post">
       <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" autocomplete="email" required>
       <input type="hidden" name="ml-submit" value="1">
       <input type="hidden" name="anticsrf" value="true">
-      <button type="submit">Notify me</button>
+      <button type="submit">Remind me</button>
     </form>
     <p class="signup-msg" id="signup-msg" role="status" aria-live="polite" hidden></p>
     <p class="signoff">Become a receiver… you can, too. ♥</p>
@@ -878,13 +909,48 @@
       msg.hidden=false;
       if(ok){ msg.className='signup-msg'; msg.textContent='Thank you! Please check your email and tap the link to confirm. ♥'; f.reset(); }
       else { msg.className='signup-msg err'; msg.textContent='Something went wrong. Please try again in a moment.'; }
-      btn.disabled=false; btn.textContent='Notify me';
+      btn.disabled=false; btn.textContent='Remind me';
     };
     var email=f.querySelector('input[type=email]').value;
     fetch('/api/subscribe',{method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams({email:email}).toString()})
       .then(function(r){ return r.json().catch(function(){return {success:false};}); })
       .then(function(d){ done(!!(d && d.success)); })
       .catch(function(){ done(false); });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var dlg=document.getElementById('vote-dialog'); if(!dlg) return;
+  var form=document.getElementById('vote-form'), title=document.getElementById('vote-title'),
+      email=document.getElementById('vote-email'), msg=document.getElementById('vote-msg'),
+      submit=form.querySelector('.vote-submit'), current=null, currentBtn=null;
+  document.querySelectorAll('.track .vote').forEach(function(b){
+    b.addEventListener('click', function(){
+      current=b.getAttribute('data-song'); currentBtn=b; title.textContent=current;
+      msg.hidden=true; submit.hidden=false; email.hidden=false;
+      if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+      email.focus();
+    });
+  });
+  form.querySelector('.vote-close').addEventListener('click', function(){ dlg.close ? dlg.close() : dlg.removeAttribute('open'); });
+  dlg.addEventListener('click', function(e){ if(e.target===dlg && dlg.close) dlg.close(); });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    submit.disabled=true; submit.textContent='Sending…';
+    fetch('/api/subscribe',{method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams({email:email.value, song:current}).toString()})
+      .then(function(r){ return r.json().catch(function(){return {success:false};}); })
+      .then(function(d){
+        msg.hidden=false;
+        if(d && d.success){
+          msg.className='vote-msg'; msg.textContent='Thank you! Your vote for “'+current+'” is in. If this is your first time, check your email to confirm. ♥';
+          submit.hidden=true; email.hidden=true; email.value='';
+          if(currentBtn){ currentBtn.classList.add('voted'); currentBtn.innerHTML='&#9829;<span>Voted</span>'; }
+        } else { msg.className='vote-msg err'; msg.textContent='Something went wrong. Please try again in a moment.'; }
+      })
+      .catch(function(){ msg.hidden=false; msg.className='vote-msg err'; msg.textContent='Something went wrong. Please try again in a moment.'; })
+      .then(function(){ submit.disabled=false; submit.textContent='Cast my vote ♡'; });
   });
 })();
 </script>
