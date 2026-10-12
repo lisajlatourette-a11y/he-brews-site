@@ -290,7 +290,7 @@
     padding-top:56.25%;
     background:#1c1420;
   }
-  .yt-embed iframe{
+  .yt-embed iframe, .yt-embed video{
     position:absolute;
     top:0; left:0;
     width:100%; height:100%;
@@ -705,11 +705,10 @@
            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Our Father Flame" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
            using the video ID from the share link, e.g. https://youtu.be/XXXXXXXXXXX -> YOUR_VIDEO_ID = XXXXXXXXXXX -->
       <div class="yt-embed">
-        <div class="ph-copy">
-          <span class="ph-icon">🎥</span>
-          <p class="ph-title">Video coming soon</p>
-          <p class="ph-sub">"Our Father Flame" will be right here — link on the way.</p>
-        </div>
+        <video controls playsinline preload="metadata" poster="our-father-flame-poster.jpg" title="Our Father Flame by Lisa LaTourette">
+          <source src="our-father-flame.mp4" type="video/mp4">
+          Your browser can't play this video.
+        </video>
       </div>
       <div class="song-meta">
         <div>
