@@ -849,7 +849,7 @@
       <p class="lede"><strong>He Brews</strong>, <strong>He Brews <span class="love-mark">Love</span></strong>, and The Love Journals launch together on Amazon.</p>
     </div>
     <div class="launch-date">November 1, 2026</div>
-    <form class="signup" id="ml-signup" action="https://assets.mailerlite.com/jsonp/2706957/forms/201151474732894010/subscribe" method="post">
+    <form class="signup" id="ml-signup" action="/api/subscribe" method="post">
       <input type="email" name="fields[email]" placeholder="you@email.com" aria-label="Email address" autocomplete="email" required>
       <input type="hidden" name="ml-submit" value="1">
       <input type="hidden" name="anticsrf" value="true">
@@ -880,13 +880,11 @@
       else { msg.className='signup-msg err'; msg.textContent='Something went wrong. Please try again in a moment.'; }
       btn.disabled=false; btn.textContent='Notify me';
     };
-    fetch(f.action,{method:'POST', body:new FormData(f)})
-      .then(function(r){ return r.json().catch(function(){return {success:r.ok};}); })
-      .then(function(d){ done(d && d.success!==false); })
-      .catch(function(){
-        fetch(f.action,{method:'POST', mode:'no-cors', body:new FormData(f)})
-          .then(function(){ done(true); }).catch(function(){ done(false); });
-      });
+    var email=f.querySelector('input[type=email]').value;
+    fetch('/api/subscribe',{method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams({email:email}).toString()})
+      .then(function(r){ return r.json().catch(function(){return {success:false};}); })
+      .then(function(d){ done(!!(d && d.success)); })
+      .catch(function(){ done(false); });
   });
 })();
 </script>
